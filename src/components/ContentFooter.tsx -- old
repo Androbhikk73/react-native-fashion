@@ -1,0 +1,36 @@
+import React, { ReactNode } from 'react';
+import { Dimensions, Image, StyleSheet } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
+import { useTheme } from './Theme';
+
+const { width } = Dimensions.get('window');
+const viewBox = {
+	wWidth: 375,
+	height: 100,
+};
+const height = (100 * width) / viewBox.wWidth;
+const d = 'M 0 0 H 375 A 50 50 0 0 1 325 50 H 50 A 50 50 0 0 0 0 100';
+const styles = StyleSheet.create({
+	background: { ...StyleSheet.absoluteFillObject, width, height: undefined, resizeMode: 'repeat' },
+});
+
+interface ContentFooterProps {
+	children: ReactNode;
+}
+
+const ContentFooter = ({ children }: ContentFooterProps) => {
+	const theme = useTheme();
+	return (
+		<>
+			<Image source={require('./assets/patterns/2.png')} style={styles.background} />
+
+			{children}
+
+			<Svg {...{ width }} {...{ height }} viewBox={[0, 0, viewBox.wWidth, viewBox.height].join(' ')}>
+				<Path fill={theme.colors.background} {...{ d }} />
+			</Svg>
+		</>
+	);
+};
+
+export default ContentFooter;

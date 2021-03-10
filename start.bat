@@ -1,0 +1,1 @@
+cd android && gradlew clean && cd .. && cls && npx react-native run-android
